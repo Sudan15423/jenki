@@ -10,12 +10,12 @@ pipeline {
             }
         }
         stage('Check Files') {
-        steps {
-        sh 'ls -ltr'
-        sh 'sudo docker ps'
+        	steps {
+        		sh 'ls -ltr'
+        		sh 'sudo docker ps'
+        	}
         }
-        }
-	}
+    }
     post {
         success {
             sh 'echo "build successfull"'
