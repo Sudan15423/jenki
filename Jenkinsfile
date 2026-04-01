@@ -1,16 +1,20 @@
 pipeline {
     agent any
 
-    stages {
-        stage('Git Clone') {
+    
+	stage('Checkout') {
             steps {
-                sh 'rm -Rf jenki'
-                sh 'git clone https://github.com/Sudan15423/jenki.git'
-                sh 'pwd'
-                sh 'ls -ltr'
+                git branch: 'main',
+                    url: 'https://github.com/Sudan15423/jenki.git',
+                    credentialsId: 'git-sudancred01'
             }
-        }           
-    }
+        }
+        stage('Check Files') {
+        steps {
+        sh 'ls -ltr'
+        sh 'sudp docker ps'
+        }
+        }
     post {
         success {
             sh 'echo "build successfull"'
