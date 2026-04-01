@@ -1,7 +1,7 @@
 pipeline {
     agent any
 
-    
+    stages {
 	stage('Checkout') {
             steps {
                 git branch: 'main',
@@ -15,6 +15,7 @@ pipeline {
         sh 'sudp docker ps'
         }
         }
+	}
     post {
         success {
             sh 'echo "build successfull"'
