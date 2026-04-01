@@ -2,28 +2,22 @@ pipeline {
     agent any
 
     stages {
-        stage('Remove Cloned Code') {
+        stage('Git Clone') {
             steps {
-                
-                sh 'rm -Rf proj-feb'
+                sh 'rm -Rf jenki'
+                sh 'git clone https://github.com/Sudan15423/jenki.git'
+                sh 'pwd'
+                sh 'ls -ltr'
             }
+        }           
+    }
+    post {
+        success {
+            sh 'echo "build successfull"'
         }
-
-        stage('Remove Docker Images') {
-            steps {
-                
-                sh 'sudo docker rmi susigugh/blog:17-Jul || true'
-                
-                
-                sh 'sudo docker rmi blog || true'
-            }
-        }
-
-        stage('Prune System') {
-            steps {
-                
-                sh 'sudo docker builder prune -f'
-            }
+        failure {
+            sh 'echo "build failed"'
         }
     }
 }
+
